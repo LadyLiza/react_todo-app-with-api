@@ -314,18 +314,13 @@ export const App: React.FC = () => {
           onAdd={handleAddTodo}
           inputRef={inputRef}
           disabled={!!tempTodo}
+          allCompleted={todos.length > 0 && todos.every(todo => todo.completed)}
+          toggleAll={handleToggleAll}
+          disabledToggleAll={loadingTodoIds.length > 0}
+          isVisible={todos.length > 0}
+          // isVisible={todos.length > 0 && !loadingTodoIds}
+          // isVisible={todos.length > 0 && loadingTodoIds.length === 0}
         />
-
-        {todos.length > 0 && (
-          <input
-            type="checkbox"
-            data-cy="ToggleAllButton"
-            className={`toggle-all${todos.every(todo => todo.completed) ? ' active' : ''}`}
-            checked={todos.every(todo => todo.completed)}
-            onChange={handleToggleAll}
-            disabled={loadingTodoIds.length > 0}
-          />
-        )}
 
         <TodoList
           todos={filteredTodos}
